@@ -1,30 +1,32 @@
 import {FC} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {EWhereHere, IFormValues,} from "../../interfases/user";
 import {userService} from "../../servises/userService";
-import {Simulate} from "react-dom/test-utils";
 
 
 interface IProps {
 
 }
 
-
 const RegisterForm: FC<IProps> = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<IFormValues>()
+    const {register, handleSubmit, formState: {errors}, reset} = useForm<IFormValues>()
     const {id} = useParams<{ id: string }>()
+    const navigate = useNavigate()
 
-
-    const save: SubmitHandler<IFormValues> =async (data) => {
-       await userService.saveUser(data).catch((error) => alert(`${error.response?.data?.message || error.message}`));
-
+    const save: SubmitHandler<IFormValues> = async (data) => {
+       const user=await userService.saveUser(data)
+            .catch((error) => alert(`${error.response?.data?.message || error.message}`));
+if (user) {
+    navigate(`/users/${id}`)
+}
+        reset()
     }
 
     return (
         <form onSubmit={handleSubmit(save)}>
             <>
-                <input type="hidden" value={+id} {...register('event_id', {valueAsNumber: true,required: true})} />
+                <input type="hidden" value={+id} {...register('event_id', {valueAsNumber: true, required: true})} />
             </>
             <div>
                 <label>Name:</label>

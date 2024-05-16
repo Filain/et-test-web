@@ -9,8 +9,8 @@ interface IProps extends PropsWithChildren {
 const MainPage: FC<IProps> = () => {
     return (
         <div>
-            MainPage
-            <Outlet/>
+
+                        <Outlet/>
 
 
         </div>
