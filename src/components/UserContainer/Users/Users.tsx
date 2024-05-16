@@ -1,22 +1,25 @@
 import {FC, useEffect, useState} from "react";
-import {IEvent} from "../../../interfases/event";
-import {eventService} from "../../../servises/eventService";
-import {useSearchParams} from "react-router-dom";
-import {Event} from "../Event/Event";
-import css from './Events.module.css'
+import {User} from "../User/User";
+import {useParams, useSearchParams} from "react-router-dom";
+import {IUser} from "../../../interfases/user";
+import {userService} from "../../../servises/userService";
+import css from "./Users.module.css"
 
 interface IProps {
 
 }
 
-const Events: FC<IProps> = () => {
-    const [event, setEvent] = useState<IEvent[]>([])
+const Users: FC<IProps> = () => {
+    const {id} = useParams<{ id: string }>()
+    const [user, setUser] = useState<IUser[]>([])
+
     const [totalPage, setTotalPage] = useState<number>()
 
     const [query, setQuery] = useSearchParams({page: '1'});
     const [prevNext, setPrevNext] = useState({prev: null, next: null});
 
     const page = query.get('page');
+
 
 
     const prev = () => {
@@ -33,18 +36,20 @@ const Events: FC<IProps> = () => {
     }
 
     useEffect(() => {
-        eventService.getAll(page).then(({data}) => {
-            setEvent(data.data)
+        userService.getAll(page,id).then(({data}) =>{
+            setUser(data.data)
             setTotalPage(data.meta.total)
-            setPrevNext({prev: data.meta.page - 1, next: data.meta.page + 1})
-        })
-    }, [page]);
+            setPrevNext({prev: data.meta.page-1, next: data.meta.page+1})} )
+
+
+    }, [page,id]);
 
     return (
         <>
-            <div className={css.events_wrap}>
-                {event.map((item, index) => <Event key={index} event={item}/>)}
-            </div>
+        <div className={css.users_wrap}>
+            {user.map((item, index) => <User key={index} user={item}/>)}
+
+        </div>
             <div>
                 <button disabled={!prevNext.prev} onClick={prev}>prev</button>
                 <button disabled={prevNext.next > totalPage} onClick={next}>next</button>
@@ -53,4 +58,4 @@ const Events: FC<IProps> = () => {
     );
 };
 
-export {Events};
+export {Users};

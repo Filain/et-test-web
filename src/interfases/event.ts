@@ -6,3 +6,11 @@
   organizer: string;
   date: string;
  }
+
+ export interface IEventList {
+   data: IEvent[];
+   meta: {
+     page: number;
+     total: number;
+   };
+ }

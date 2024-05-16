@@ -1,4 +1,5 @@
-import {FC, PropsWithChildren} from "react";
+import {FC} from "react";
+import {RegisterForm} from "../components/RegisterForm/RegisterForm";
 
 interface IProps {
 
@@ -7,7 +8,7 @@ interface IProps {
 const RegistrationPage: FC<IProps> = () => {
     return (
         <div>
-            RegistrationPage
+            <RegisterForm/>
         </div>
     );
 };

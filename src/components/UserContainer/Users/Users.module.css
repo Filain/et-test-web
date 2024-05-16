@@ -1,0 +1,6 @@
+.users_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}

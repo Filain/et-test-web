@@ -16,6 +16,9 @@ const Event: FC<IProps> = ({event}) => {
             <p>title: {title}</p>
             <p>description: {description}</p>
             <p>organizer: {organizer}</p>
+            <NavLink to={`/registration/${id}`}>Register</NavLink>
+            <br/>
+            <NavLink to={`/users/${id}`}>View</NavLink>
         </div>
     );
 };
