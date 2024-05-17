@@ -9,7 +9,8 @@ const urls={
     },
     users: {
         base: users,
-        byId: (id:string) => `${users}/${id}`
+        byId: (id:string) => `${users}/${id}`,
+        byDay: (id:string) => `${users}/day/${id}`
 
     }
 }

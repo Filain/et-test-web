@@ -4,7 +4,7 @@ import {urls} from "../constans/urls";
 import {IEventList} from "../interfases/event";
 
 const eventService={
-    getAll:(page:string):Promise<AxiosResponse<IEventList>> => axiosService.get(urls.events.base,{params:{page}})
+    getAll:(page:string, sortBy:string):Promise<AxiosResponse<IEventList>> => axiosService.get(urls.events.base,{params:{page,sortBy}}),
 }
 
 export {

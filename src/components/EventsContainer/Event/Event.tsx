@@ -16,10 +16,11 @@ const Event: FC<IProps> = ({event}) => {
             <p>title: {title}</p>
             <p>description: {description}</p>
             <p>organizer: {organizer}</p>
-            <NavLink to={`/registration/${id}`}>Register</NavLink>
-            <br/>
-            <NavLink to={`/users/${id}`}>View</NavLink>
-        </div>
+            <div className={css.buttonWrap}>
+            <NavLink to={`/registration/${id}`} className={css.linkbutton}>Register</NavLink>
+            <NavLink to={`/users/${id}`} className={css.linkbutton}>View</NavLink>
+            </div>
+            </div>
     );
 };
 

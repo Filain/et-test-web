@@ -3,6 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate, useParams} from "react-router-dom";
 import {EWhereHere, IFormValues,} from "../../interfases/user";
 import {userService} from "../../servises/userService";
+import css from "./Register.module.css"
 
 
 interface IProps {
@@ -24,7 +25,9 @@ if (user) {
     }
 
     return (
-        <form onSubmit={handleSubmit(save)}>
+        <div className={css.wrap}>
+            <div className={css.height}>
+        <form onSubmit={handleSubmit(save)} className={css.form}>
             <>
                 <input type="hidden" value={+id} {...register('event_id', {valueAsNumber: true, required: true})} />
             </>
@@ -62,6 +65,8 @@ if (user) {
             </div>
             <button type="submit">Submit</button>
         </form>
+        </div>
+        </div>
     );
 };
 
